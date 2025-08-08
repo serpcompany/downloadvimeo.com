@@ -36,8 +36,8 @@ export function Footer() {
           <div>
             <h4 className="mb-4 text-sm font-semibold">More Tools</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/" className="hover:text-primary">Download Vimeo (Home)</Link></li>
-              <li><a href="https://downloadvimeo.com" className="hover:text-primary" target="_blank" rel="noopener noreferrer">downloadvimeo.com</a></li>
+              <li><Link href="/" className="hover:text-primary">Download Vimeo</Link></li>
+              <li><a href="https://getlooma.com" className="hover:text-primary" target="_blank" rel="noopener noreferrer">Get Looma</a></li>
               <li><a href="https://serpdownloaders.github.io" className="hover:text-primary" target="_blank" rel="noopener noreferrer">SERP Downloaders</a></li>
             </ul>
           </div>
