@@ -14,6 +14,7 @@ export const siteConfig = {
   categories: [
     "Vimeo Downloaders",
   ],
+  gtmId: "GTM-PLDR624X",
   metadata: {
     keywords: ["download vimeo", "vimeo downloader", "vimeo video download", "vimeo mp4", "vimeo audio download", "vimeo transcript", "vimeo to mp4", "download vimeo chrome", "download vimeo firefox", "vimeo download windows", "vimeo download mac", "online vimeo downloader", "free vimeo download"],
     openGraph: {
