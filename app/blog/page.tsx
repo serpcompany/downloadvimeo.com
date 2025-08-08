@@ -11,7 +11,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: `Blog | ${siteConfig.name}`,
-  description: 'Read our latest articles about Vimeo downloading, video tips, and tutorials.',
+  description: 'Read our latest articles.',
 };
 
 export default function BlogPage() {
