@@ -5,7 +5,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `DMCA Policy | ${siteConfig.name}`,
-  description: "DMCA Policy for Download Vimeo - Copyright infringement notification procedures.",
+  description: `DMCA Policy for ${siteConfig.name} - Copyright infringement notification procedures.`,
 };
 
 export default function DMCAPage() {

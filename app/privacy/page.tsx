@@ -5,7 +5,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `Privacy Policy | ${siteConfig.name}`,
-  description: "Privacy Policy for Download Vimeo - Learn how we protect your data and privacy.",
+  description: `Privacy Policy for ${siteConfig.name} - Learn how we protect your data and privacy.`,
 };
 
 export default function PrivacyPage() {

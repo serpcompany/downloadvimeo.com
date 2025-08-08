@@ -5,7 +5,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `Terms of Service | ${siteConfig.name}`,
-  description: "Terms of Service for Download Vimeo - Understand your rights and responsibilities when using our service.",
+  description: `Terms of Service for ${siteConfig.name} - Understand your rights and responsibilities when using our service.`,
 };
 
 export default function TermsPage() {
