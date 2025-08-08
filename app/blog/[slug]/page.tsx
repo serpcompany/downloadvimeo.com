@@ -1,6 +1,5 @@
 import { getPostBySlug, getAllPosts } from '@/lib/blog';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { useMDXComponents } from '@/components/mdx-components';
 import { notFound } from 'next/navigation';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -9,6 +8,7 @@ import { Calendar, Clock, User } from 'lucide-react';
 import { format } from 'date-fns';
 import Link from 'next/link';
 import { siteConfig } from '@/site.config';
+import { mdxComponents } from '@/components/mdx-components';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -54,8 +54,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   if (!post) {
     notFound();
   }
-
-  const components = useMDXComponents({});
 
   return (
     <>
@@ -112,7 +110,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             {/* Tags */}
             {post.meta.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
-                {post.meta.tags.map((tag) => (
+                {post.meta.tags.map((tag: string) => (
                   <Badge key={tag} variant="secondary">
                     {tag}
                   </Badge>
@@ -123,7 +121,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
           {/* Post Content */}
           <div className="prose prose-gray max-w-none dark:prose-invert">
-            <MDXRemote source={post.content} components={components} />
+            <MDXRemote source={post.content} components={mdxComponents} />
           </div>
 
           {/* Post Footer */}

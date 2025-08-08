@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, User, ArrowRight, FileText } from 'lucide-react';
 import { format } from 'date-fns';
 import Link from 'next/link';
+import Image from 'next/image';
 import { siteConfig } from '@/site.config';
 import { Metadata } from 'next';
 
@@ -50,11 +51,12 @@ export default function BlogPage() {
                   <Link key={post.slug} href={`/blog/${post.slug}`}>
                     <Card className="h-full transition-all hover:shadow-lg hover:-translate-y-1 overflow-hidden">
                       {post.image ? (
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img
+                        <div className="aspect-video w-full overflow-hidden relative">
+                          <Image
                             src={post.image}
                             alt={post.title}
-                            className="h-full w-full object-cover"
+                            fill
+                            className="object-cover"
                           />
                         </div>
                       ) : (

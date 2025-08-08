@@ -23,7 +23,7 @@ export default function DMCAPage() {
 
             <h2>Digital Millennium Copyright Act Notice</h2>
             <p>
-              {siteConfig.name} respects the intellectual property rights of others and expects users of our Service to do the same. In accordance with the Digital Millennium Copyright Act of 1998 ("DMCA"), we will respond expeditiously to claims of copyright infringement committed using our Service.
+              {siteConfig.name} respects the intellectual property rights of others and expects users of our Service to do the same. In accordance with the Digital Millennium Copyright Act of 1998 (&quot;DMCA&quot;), we will respond expeditiously to claims of copyright infringement committed using our Service.
             </p>
 
             <h2>DMCA Compliance</h2>

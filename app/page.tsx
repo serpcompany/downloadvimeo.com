@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { 
@@ -17,13 +17,9 @@ import {
   Globe,
   CheckCircle,
   ArrowRight,
-  Play,
-  Volume2,
-  FileDown,
   Chrome,
   Monitor,
   Smartphone,
-  Clock,
   Star
 } from "lucide-react";
 import Link from "next/link";
@@ -96,30 +92,31 @@ export default function HomePage() {
     }
   ];
 
+  // FAQ questions sourced from Google's "People also ask" section for "download Vimeo videos"
   const faqs = [
     {
-      question: "How do I download Vimeo videos?",
-      answer: "Simply paste the Vimeo URL into our downloader and click the download button."
+      question: "Can I download any Vimeo video?",
+      answer: "You can download a video from Vimeo if the video owner permits downloads. Look for a download button below the video player. If you don't see it, the owner has disabled downloads for that video."
     },
     {
-      question: "Do I need to install any software?",
-      answer: "No, our tool works directly in your browser. No software installation required."
+      question: "Why don't I see a download button on Vimeo?",
+      answer: "If there's no download button, the video owner has disabled downloads. Vimeo Plus members and higher can disable downloads on their videos. Free and Basic members cannot enable video downloads."
     },
     {
-      question: "What video formats are supported?",
-      answer: "We support MP4, WebM, and other popular video formats, as well as MP3 for audio."
+      question: "Is it legal to download Vimeo videos?",
+      answer: "Downloading is legal only when you have permission from the copyright holder or when the owner has enabled downloads. Downloading protected content without consent is copyright infringement and may violate Vimeo's terms of service."
     },
     {
-      question: "Is there a limit on downloads?",
-      answer: "No, you can download as many videos as you need without any restrictions."
+      question: "Can I download private or embedded Vimeo videos?",
+      answer: "Private videos require explicit permission from the owner. It's not possible to download videos directly from embedded players - you need to visit the video's page on Vimeo and check if downloads are enabled."
     },
     {
-      question: "Can I download private Vimeo videos?",
-      answer: "Our tool can only download publicly available videos due to privacy and copyright restrictions."
+      question: "What if the video opens in a new tab instead of downloading?",
+      answer: "Right-click on the download link and choose 'Save as' (Windows) or hold Control and click, then select 'Save link as' (Mac). This will save the file to your computer instead of opening it in your browser."
     },
     {
-      question: "Does it work on mobile devices?",
-      answer: "Yes, our downloader works on all devices including smartphones and tablets."
+      question: "Can downloading videos from Vimeo be tracked?",
+      answer: "Video owners can see view statistics but cannot track individual downloads. However, downloading copyrighted content without permission is illegal regardless of tracking capabilities."
     }
   ];
 
@@ -137,8 +134,7 @@ export default function HomePage() {
                 Fast Vimeo Downloader
               </Badge>
               <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-                Download Vimeo Videos
-                <span className="block text-primary">In Seconds</span>
+                Vimeo Video Downloader
               </h1>
               <p className="mb-10 text-lg text-muted-foreground md:text-xl">
                 Download Vimeo videos, audio, and transcripts instantly. No registration required.
