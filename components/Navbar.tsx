@@ -5,19 +5,13 @@ import { Search, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { siteConfig } from "@/site.config";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const categories = [
-    "All Tools",
-    "Converters", 
-    "Combiners",
-    "Counters",
-    "Generators",
-    "Formatters"
-  ];
+  const categories = siteConfig.categories;
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -25,7 +19,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-primary">SerpTools</span>
+            <span className="text-2xl font-bold text-primary">{siteConfig.name}</span>
           </Link>
 
           {/* Desktop Navigation */}

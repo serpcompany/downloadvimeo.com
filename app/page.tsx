@@ -7,241 +7,389 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { 
-  Search, 
-  FileText, 
-  Combine, 
-  Calculator, 
-  Type, 
-  FileJson, 
-  Upload, 
-  Table, 
-  Hash,
-  Sparkles,
+  Download,
+  FileVideo,
+  FileAudio,
+  FileText,
+  Zap,
+  Shield,
+  Globe,
+  CheckCircle,
   ArrowRight,
-  Filter
+  Play,
+  Volume2,
+  FileDown,
+  Chrome,
+  Monitor,
+  Smartphone,
+  Clock,
+  Star
 } from "lucide-react";
 import Link from "next/link";
-
-// Define tool categories
-const categories = [
-  { id: "all", name: "All Tools", count: 0 },
-  { id: "converter", name: "Converters", count: 0 },
-  { id: "combiner", name: "Combiners", count: 0 },
-  { id: "counter", name: "Counters", count: 0 },
-  { id: "generator", name: "Generators", count: 0 },
-  { id: "formatter", name: "Formatters", count: 0 },
-];
-
-// Define tools data
-const tools = [
-  {
-    id: "csv-combiner",
-    name: "CSV Combiner",
-    description: "Combine multiple CSV files into one. Merge data from different sources easily.",
-    category: "combiner",
-    icon: Table,
-    href: "/tools/csv-combiner",
-    tags: ["csv", "merge", "data"],
-    isNew: true,
-    isPopular: false,
-  },
-  {
-    id: "json-to-csv",
-    name: "JSON to CSV Converter",
-    description: "Convert JSON data to CSV format. Perfect for data analysis and spreadsheets.",
-    category: "converter",
-    icon: FileJson,
-    href: "/tools/json-to-csv",
-    tags: ["json", "csv", "convert"],
-    isNew: true,
-    isPopular: true,
-  },
-  {
-    id: "character-counter",
-    name: "Character Counter",
-    description: "Count characters, words, sentences, and paragraphs in your text instantly.",
-    category: "counter",
-    icon: Type,
-    href: "/tools/character-counter",
-    tags: ["text", "count", "words"],
-    isNew: true,
-    isPopular: true,
-  },
-];
-
-// Update category counts
-categories.forEach(category => {
-  if (category.id === "all") {
-    category.count = tools.length;
-  } else {
-    category.count = tools.filter(tool => tool.category === category.id).length;
-  }
-});
+import { siteConfig } from "@/site.config";
 
 export default function HomePage() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Filter tools based on category and search
-  const filteredTools = tools.filter(tool => {
-    const matchesCategory = selectedCategory === "all" || tool.category === selectedCategory;
-    const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         tool.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  const handleDownload = async () => {
+    if (!videoUrl) return;
+    setIsLoading(true);
+    // TODO: Implement download logic
+    setTimeout(() => setIsLoading(false), 2000);
+  };
+
+  const features = [
+    {
+      icon: FileVideo,
+      title: "HD Video Downloads",
+      description: "Download Vimeo videos in multiple resolutions including 1080p, 720p, 480p, and more."
+    },
+    {
+      icon: FileAudio,
+      title: "Audio Extraction",
+      description: "Extract high-quality audio from Vimeo videos in MP3 or other audio formats."
+    },
+    {
+      icon: FileText,
+      title: "Transcript Download",
+      description: "Download video transcripts and subtitles when available."
+    },
+    {
+      icon: Zap,
+      title: "Lightning Fast",
+      description: "Our optimized servers ensure quick processing and download speeds."
+    },
+    {
+      icon: Shield,
+      title: "Safe & Secure",
+      description: "No registration required. Your privacy is our priority."
+    },
+    {
+      icon: Globe,
+      title: "Works Everywhere",
+      description: "Compatible with Chrome, Firefox, Safari, and all major browsers."
+    }
+  ];
+
+  const steps = [
+    {
+      number: "1",
+      title: "Copy Vimeo URL",
+      description: "Go to Vimeo and copy the URL of the video you want to download."
+    },
+    {
+      number: "2",
+      title: "Paste & Analyze",
+      description: "Paste the URL in our downloader and click the download button."
+    },
+    {
+      number: "3",
+      title: "Choose Format",
+      description: "Select your preferred video quality or audio format."
+    },
+    {
+      number: "4",
+      title: "Download",
+      description: "Click download and save the file to your device."
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "How do I download Vimeo videos?",
+      answer: "Simply paste the Vimeo URL into our downloader and click the download button."
+    },
+    {
+      question: "Do I need to install any software?",
+      answer: "No, our tool works directly in your browser. No software installation required."
+    },
+    {
+      question: "What video formats are supported?",
+      answer: "We support MP4, WebM, and other popular video formats, as well as MP3 for audio."
+    },
+    {
+      question: "Is there a limit on downloads?",
+      answer: "No, you can download as many videos as you need without any restrictions."
+    },
+    {
+      question: "Can I download private Vimeo videos?",
+      answer: "Our tool can only download publicly available videos due to privacy and copyright restrictions."
+    },
+    {
+      question: "Does it work on mobile devices?",
+      answer: "Yes, our downloader works on all devices including smartphones and tablets."
+    }
+  ];
 
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative overflow-hidden border-b">
+        <section className="relative overflow-hidden border-b bg-gradient-to-b from-primary/5 to-background">
           <div className="absolute inset-0 bg-grid-black/[0.02] dark:bg-grid-white/[0.02]" />
-          <div className="container relative py-16 md:py-24">
-            <div className="mx-auto max-w-2xl text-center">
+          <div className="container relative py-20 md:py-32">
+            <div className="mx-auto max-w-4xl text-center">
               <Badge className="mb-4" variant="secondary">
-                <Sparkles className="mr-1 h-3 w-3" />
-                Free Online Tools
+                <Zap className="mr-1 h-3 w-3" />
+                Fast Vimeo Downloader
               </Badge>
-              <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                Simple Tools for
-                <span className="text-primary"> Everyday Tasks</span>
+              <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+                Download Vimeo Videos
+                <span className="block text-primary">In Seconds</span>
               </h1>
-              <p className="mb-8 text-lg text-muted-foreground">
-                A collection of free, easy-to-use online tools to help you work more efficiently. 
-                No signup required, no data stored.
+              <p className="mb-10 text-lg text-muted-foreground md:text-xl">
+                Download Vimeo videos, audio, and transcripts instantly. No registration required.
+                Works on all devices and browsers.
               </p>
               
-              {/* Search Bar */}
-              <div className="relative mx-auto max-w-xl">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search tools..."
-                  className="w-full pl-10 pr-4 py-6 text-base"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+              {/* Download Form */}
+              <div className="mx-auto max-w-2xl">
+                <div className="flex flex-col gap-4 sm:flex-row">
+                  <Input
+                    type="url"
+                    placeholder="Paste Vimeo video URL here..."
+                    className="flex-1 px-6 py-6 text-base"
+                    value={videoUrl}
+                    onChange={(e) => setVideoUrl(e.target.value)}
+                  />
+                  <Button 
+                    size="lg" 
+                    className="px-8 py-6 text-base font-semibold"
+                    onClick={handleDownload}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>Processing...</>
+                    ) : (
+                      <>
+                        <Download className="mr-2 h-5 w-5" />
+                        Download Video
+                      </>
+                    )}
+                  </Button>
+                </div>
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Example: https://vimeo.com/123456789
+                </p>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>No Registration</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Unlimited Downloads</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>High Speed</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>HD Quality</span>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Main Content */}
-        <section className="container py-12">
-          <div className="flex flex-col gap-8 lg:flex-row">
-            {/* Sidebar Categories */}
-            <aside className="w-full lg:w-64">
-              <div className="sticky top-20 space-y-2">
-                <h2 className="mb-4 text-sm font-semibold text-muted-foreground">CATEGORIES</h2>
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
-                      selectedCategory === category.id
-                        ? "bg-primary text-primary-foreground"
-                        : "hover:bg-accent hover:text-accent-foreground"
-                    }`}
-                  >
-                    <span>{category.name}</span>
-                    <span className={`text-xs ${
-                      selectedCategory === category.id ? "opacity-70" : "text-muted-foreground"
-                    }`}>
-                      {category.count}
-                    </span>
-                  </button>
+        {/* Features Section */}
+        <section className="container py-20 md:py-28">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+              Everything You Need to Download Vimeo Content
+            </h2>
+            <p className="mb-12 text-lg text-muted-foreground">
+              Our powerful downloader supports all types of Vimeo content with advanced features.
+            </p>
+          </div>
+
+          <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <Card key={index} className="border-2 transition-all hover:border-primary/50 hover:shadow-lg">
+                  <CardHeader>
+                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <CardTitle className="text-xl">{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="border-y bg-muted/30">
+          <div className="container py-20 md:py-28">
+            <div className="mx-auto max-w-4xl text-center">
+              <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+                How to Download Vimeo Videos
+              </h2>
+              <p className="mb-12 text-lg text-muted-foreground">
+                Download any Vimeo video in 4 simple steps
+              </p>
+            </div>
+
+            <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 lg:grid-cols-4">
+              {steps.map((step, index) => (
+                <div key={index} className="relative text-center">
+                  <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground">
+                    {step.number}
+                  </div>
+                  <h3 className="mb-2 text-lg font-semibold">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground">{step.description}</p>
+                  {index < steps.length - 1 && (
+                    <ArrowRight className="absolute -right-4 top-8 hidden h-6 w-6 text-muted-foreground lg:block" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Supported Platforms Section */}
+        <section className="container py-20 md:py-28">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+              Works on All Platforms
+            </h2>
+            <p className="mb-12 text-lg text-muted-foreground">
+              Download Vimeo videos from any device or browser
+            </p>
+
+            <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+              <div className="flex flex-col items-center gap-3">
+                <Chrome className="h-12 w-12 text-primary" />
+                <span className="font-medium">Chrome</span>
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <Globe className="h-12 w-12 text-primary" />
+                <span className="font-medium">Firefox</span>
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <Monitor className="h-12 w-12 text-primary" />
+                <span className="font-medium">Desktop</span>
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <Smartphone className="h-12 w-12 text-primary" />
+                <span className="font-medium">Mobile</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="border-t bg-muted/30">
+          <div className="container py-20 md:py-28">
+            <div className="mx-auto max-w-4xl">
+              <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
+                Frequently Asked Questions
+              </h2>
+
+              <div className="space-y-6">
+                {faqs.map((faq, index) => (
+                  <Card key={index}>
+                    <CardHeader>
+                      <CardTitle className="text-lg">{faq.question}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{faq.answer}</p>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
-            </aside>
-
-            {/* Tools Grid */}
-            <div className="flex-1">
-              <div className="mb-6 flex items-center justify-between">
-                <p className="text-sm text-muted-foreground">
-                  Showing {filteredTools.length} of {tools.length} tools
-                </p>
-                <Button variant="outline" size="sm">
-                  <Filter className="mr-2 h-4 w-4" />
-                  Filter
-                </Button>
-              </div>
-
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {filteredTools.map((tool) => {
-                  const Icon = tool.icon;
-                  return (
-                    <Link key={tool.id} href={tool.href}>
-                      <Card className="group h-full transition-all hover:shadow-lg hover:-translate-y-1">
-                        <CardHeader>
-                          <div className="mb-4 flex items-center justify-between">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                              <Icon className="h-6 w-6 text-primary" />
-                            </div>
-                            <div className="flex gap-2">
-                              {tool.isNew && (
-                                <Badge variant="secondary" className="text-xs">
-                                  New
-                                </Badge>
-                              )}
-                              {tool.isPopular && (
-                                <Badge variant="outline" className="text-xs">
-                                  Popular
-                                </Badge>
-                              )}
-                            </div>
-                          </div>
-                          <CardTitle className="group-hover:text-primary">
-                            {tool.name}
-                          </CardTitle>
-                          <CardDescription className="line-clamp-2">
-                            {tool.description}
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="flex flex-wrap gap-2">
-                            {tool.tags.map((tag) => (
-                              <Badge key={tag} variant="secondary" className="text-xs">
-                                {tag}
-                              </Badge>
-                            ))}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  );
-                })}
-              </div>
-
-              {filteredTools.length === 0 && (
-                <div className="py-12 text-center">
-                  <p className="text-lg text-muted-foreground">
-                    No tools found matching your criteria.
-                  </p>
-                </div>
-              )}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="border-t bg-muted/30">
-          <div className="container py-16">
-            <div className="mx-auto max-w-2xl text-center">
-              <h2 className="mb-4 text-3xl font-bold">
-                Need a specific tool?
-              </h2>
-              <p className="mb-8 text-lg text-muted-foreground">
-                We&apos;re constantly adding new tools. Let us know what you need!
-              </p>
-              <Button size="lg" className="group">
-                Request a Tool
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+        <section className="container py-20 md:py-28">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+              Start Downloading Vimeo Videos Now
+            </h2>
+            <p className="mb-8 text-lg text-muted-foreground">
+              Join millions of users who trust our Vimeo downloader
+            </p>
+            <Button size="lg" className="group px-8 py-6 text-base font-semibold" asChild>
+              <Link href="#download">
+                Start Downloading Now
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            
+            {/* Rating */}
+            <div className="mt-8 flex items-center justify-center gap-2">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <span className="text-sm text-muted-foreground">
+                4.9/5 from 10,000+ users
+              </span>
             </div>
           </div>
         </section>
+
+        {/* Footer */}
+        <footer className="border-t bg-muted/30">
+          <div className="container py-12">
+            <div className="grid gap-8 md:grid-cols-4">
+              <div>
+                <h3 className="mb-4 text-lg font-semibold">{siteConfig.name}</h3>
+                <p className="text-sm text-muted-foreground">
+                  The best online tool to download Vimeo videos, audio, and transcripts.
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="mb-4 text-sm font-semibold">Download Formats</h4>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>MP4 Video</li>
+                  <li>WebM Video</li>
+                  <li>MP3 Audio</li>
+                  <li>Transcripts</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="mb-4 text-sm font-semibold">Platforms</h4>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>Windows</li>
+                  <li>Mac</li>
+                  <li>Linux</li>
+                  <li>Mobile</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="mb-4 text-sm font-semibold">Legal</h4>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li><Link href="/privacy" className="hover:text-primary">Privacy Policy</Link></li>
+                  <li><Link href="/terms" className="hover:text-primary">Terms of Service</Link></li>
+                  <li><Link href="/dmca" className="hover:text-primary">DMCA</Link></li>
+                  <li><Link href="/contact" className="hover:text-primary">Contact</Link></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
+              <p>© 2024 {siteConfig.name}. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
       </main>
     </>
   );
